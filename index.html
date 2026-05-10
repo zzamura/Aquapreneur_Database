@@ -1,353 +1,394 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latihan Membaca Hiragana N5 - Kalimat Panjang & Acak</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
-        
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            background-color: #f8fafc;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaPreneur Database - HIMATEKBIS</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        .japanese-text {
-            font-size: 2.2rem;
-            line-height: 1.8;
-            letter-spacing: 0.1em;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.2rem;
-        }
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              900: '#0f172a',
+              accent: '#06b6d4',
+            }
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+            'pulse-glow': 'pulseGlow 2s infinite'
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '1', filter: 'drop-shadow(0 4px 6px rgba(14, 165, 233, 0.3))' },
+              '50%': { opacity: '0.8', filter: 'drop-shadow(0 10px 15px rgba(14, 165, 233, 0.5))' },
+            }
+          }
+        }
+      }
+    }
+  </script>
 
-        .char-box {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            color: #1e293b;
-        }
-
-        .char-correct {
-            color: #10b981 !important; /* Emerald 500 */
-            transform: scale(1.05);
-            text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
-        }
-
-        .char-next {
-            border-bottom: 4px solid #f43f5e; /* Rose 500 */
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { border-color: #f43f5e; opacity: 1; }
-            50% { border-color: transparent; opacity: 0.7; }
-        }
-
-        .card-shake {
-            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-        }
-
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
-        }
-    </style>
+  <style>
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 bg-slate-50">
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4 relative overflow-x-hidden text-slate-800 antialiased font-sans">
 
-    <div class="max-w-3xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 relative">
-        <!-- Header -->
-        <div class="bg-indigo-900 p-6 text-white text-center">
-            <h1 class="text-xl font-bold tracking-widest uppercase text-emerald-400">Hiragana Mastery N5+</h1>
-            <p class="text-slate-400 text-xs mt-1">Kalimat telah diacak dengan tantangan lebih panjang.</p>
-        </div>
+  <!-- Efek Dekorasi Latar Belakang -->
+  <div class="fixed top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-100 rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob"></div>
+    <div class="absolute top-[20%] right-[-5%] w-80 h-80 bg-cyan-100 rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob" style="animation-delay: 2s"></div>
+  </div>
 
-        <!-- Progress Bar -->
-        <div class="w-full bg-slate-100 h-1.5">
-            <div id="progressBar" class="bg-emerald-500 h-full transition-all duration-700" style="width: 0%"></div>
-        </div>
+  <div class="relative z-10 w-full max-w-5xl mx-auto my-8">
+    <div class="bg-white/90 backdrop-blur-xl border border-white rounded-3xl p-6 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col min-h-[600px]">
+    
+      <div class="text-center mb-8">
+        <div class="flex flex-col items-center mb-4">
+            <div class="inline-flex justify-center items-center w-16 h-16 bg-white rounded-2xl border border-brand-100 shadow-lg mb-4 animate-pulse-glow">
+              <i class="fa-solid fa-fish-fins text-2xl text-brand-600"></i>
+            </div>
+            <!-- Perbaikan: Tulisan Himpunan dibuat lebih besar (text-sm) dan lebih tebal -->
+            <p class="text-sm font-extrabold text-brand-900 uppercase tracking-widest mb-1 px-4 leading-tight">
+              Himpunan Mahasiswa Teknologi dan Bisnis Perikanan dan Kelautan
+            </p>
+            <p class="text-xs font-semibold text-slate-500 mb-2">Kabinet Periode 2025/2026</p>
+        </div>
+        
+        <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-6">
+            AquaPreneur <span class="text-brand-600">Database</span>
+        </h2>
+        
+        <div class="inline-flex bg-slate-100 p-1.5 rounded-2xl shadow-inner">
+          <button id="tabFormBtn" onclick="switchTab('form')" class="px-8 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-brand-600 shadow-sm border border-brand-50">
+            Daftar Usaha
+          </button>
+          <button id="tabDataBtn" onclick="switchTab('data')" class="px-8 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 text-slate-500 hover:text-slate-700">
+            Lihat Database
+          </button>
+        </div>
+      </div>
 
-        <!-- Main Content -->
-        <div id="gameContainer" class="p-8 md:p-12 flex flex-col items-center">
-            <!-- Stats -->
-            <div class="flex justify-between w-full mb-8 text-slate-400 font-bold text-xs uppercase tracking-widest">
-                <div id="levelDisplay">Progres: 0/0</div>
-                <div id="scoreDisplay">Skor: 0</div>
-            </div>
+      <!-- TAMPILAN: FORM INPUT -->
+      <div id="viewForm" class="animate-fade-in w-full max-w-4xl mx-auto">
+        <form id="produkForm" class="space-y-6">
+            <div class="p-6 bg-slate-50/50 rounded-2xl border border-slate-100">
+              <h3 class="text-lg font-bold text-slate-800 border-b border-slate-200 pb-3 mb-5 flex items-center">
+                <i class="fa-solid fa-shop text-brand-500 mr-2"></i>Informasi Bisnis
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div class="space-y-1">
+                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Nama Usaha / Brand</label>
+                  <input type="text" id="namaUsaha" placeholder="Nama Brand Anda" required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 transition-all font-medium">
+                </div>
+                <div class="space-y-1">
+                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Nama Pemilik</label>
+                  <input type="text" id="namaPemilik" placeholder="Nama Lengkap" required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 transition-all font-medium">
+                </div>
+                <div class="space-y-1">
+                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">No. WhatsApp Aktif</label>
+                  <input type="tel" id="whatsapp" placeholder="Contoh: 08123..." required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 transition-all font-medium">
+                </div>
+                <div class="space-y-1">
+                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Kategori Usaha</label>
+                  <select id="kategori" required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 appearance-none cursor-pointer font-medium">
+                    <option value="" disabled selected>Pilih Kategori</option>
+                    <option value="Makanan & Minuman">Makanan & Minuman</option>
+                    <option value="Budidaya & Perikanan">Budidaya & Perikanan</option>
+                    <option value="Jasa & Layanan">Jasa & Layanan</option>
+                    <option value="Teknologi & Inovasi">Teknologi & Inovasi</option>
+                  </select>
+                </div>
+                
+                <div class="space-y-1 sm:col-span-2 mt-2">
+                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Upload Poster/Foto Usaha (Maks 3MB)</label>
+                  <input type="file" id="fotoPoster" accept="image/png, image/jpeg, image/jpg" class="w-full bg-white border border-slate-200 rounded-xl py-2 px-4 outline-none focus:border-brand-500 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 text-xs">
+                </div>
+              </div>
+            </div>
 
-            <!-- Japanese Display (Hiragana ONLY) -->
-            <div class="w-full mb-10 min-h-[180px] flex items-center justify-center bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-inner">
-                <div id="questionBox" class="japanese-text font-bold text-center">
-                    <!-- Karakter diisi oleh JS -->
-                </div>
-            </div>
+            <div class="p-6 bg-slate-50/50 rounded-2xl border border-slate-100">
+              <h3 class="text-lg font-bold text-slate-800 border-b border-slate-200 pb-3 mb-4 flex items-center">
+                <i class="fa-solid fa-tags text-brand-500 mr-2"></i>Daftar Produk & Harga
+              </h3>
+              <div id="productList" class="space-y-3">
+                <div class="product-item flex flex-col sm:flex-row gap-3">
+                  <input type="text" placeholder="Nama Produk" required class="produk-nama flex-1 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm font-medium">
+                  <input type="number" placeholder="Harga (Rp)" required class="produk-harga w-full sm:w-40 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm font-medium">
+                </div>
+              </div>
+              <button type="button" id="btnAddProduct" class="mt-4 w-full py-3 bg-white border border-dashed border-slate-300 text-slate-400 rounded-xl hover:bg-slate-100 hover:text-brand-600 text-xs font-bold transition-all uppercase tracking-wider">
+                <i class="fa-solid fa-plus mr-1"></i> Tambah Item Produk
+              </button>
+            </div>
 
-            <!-- Input Area -->
-            <div class="w-full space-y-6 text-center">
-                <div class="relative">
-                    <input 
-                        type="text" 
-                        id="romajiInput" 
-                        placeholder="Ketik romaji di sini..." 
-                        autocomplete="off"
-                        autofocus
-                        class="w-full p-6 text-xl text-center rounded-2xl border-2 border-slate-100 outline-none focus:border-indigo-400 transition-all bg-white text-slate-700 font-mono shadow-sm"
-                    >
-                </div>
-                
-                <div id="meaningBox" class="text-slate-500 text-center text-sm md:text-base py-3 px-6 bg-indigo-50 rounded-xl border border-indigo-100 inline-block max-w-full">
-                    (Terjemahan)
-                </div>
-            </div>
+            <button type="submit" id="btnSubmit" class="w-full bg-brand-600 text-white font-black py-4 rounded-2xl hover:bg-brand-700 shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2 uppercase tracking-widest text-sm">
+              <span id="btnText">Daftarkan Sekarang</span> <i id="btnIcon" class="fa-solid fa-paper-plane"></i>
+              <svg id="btnSpinner" class="hidden animate-spin h-5 w-5 text-white" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            </button>
+        </form>
+        
+        <div id="statusContainer" class="hidden mt-6 p-4 rounded-xl border flex items-center gap-3 transition-all text-center justify-center shadow-sm">
+          <div id="statusIcon"></div><p id="statusText" class="text-sm font-bold"></p>
+        </div>
+        
+        <footer class="mt-12 text-center">
+            <p class="text-slate-400 text-[10px] tracking-[0.3em] uppercase font-bold">HIMATEKBIS 2026</p>
+            <p class="text-slate-300 text-[9px] mt-1 font-medium italic">Created by Ekotif Himatekbis</p>
+        </footer>
+      </div>
 
-            <div class="mt-10 flex gap-4 flex-wrap justify-center">
-                <button id="hintBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-lg flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Bantuan
-                </button>
-                <button id="resetBtn" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-all flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    Acak Ulang
-                </button>
-            </div>
-        </div>
+      <!-- TAMPILAN: DATABASE TABLE -->
+      <div id="viewData" class="hidden animate-fade-in flex-1 flex flex-col h-full">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+            <div>
+                <h3 class="text-xl font-black text-slate-800 flex items-center">
+                    <i class="fa-solid fa-database text-brand-500 mr-2"></i>Database Terpusat
+                </h3>
+                <p class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Katalog Wirausaha Mahasiswa HIMATEKBIS</p>
+            </div>
+            <button onclick="loadData()" class="flex items-center text-[10px] font-black uppercase tracking-widest bg-brand-50 text-brand-600 px-5 py-2.5 rounded-xl border border-brand-100 hover:bg-brand-600 hover:text-white transition-all shadow-sm">
+                <i class="fa-solid fa-sync mr-2"></i> Perbarui Data
+            </button>
+        </div>
+        
+        <div id="loadingData" class="flex-1 flex flex-col items-center justify-center py-20 bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
+            <div class="w-12 h-12 border-4 border-brand-100 border-t-brand-500 rounded-full animate-spin"></div>
+            <p id="loadingMsg" class="mt-4 text-slate-500 text-xs font-bold uppercase tracking-widest">Sinkronisasi Server...</p>
+        </div>
 
-        <!-- Level Complete Overlay -->
-        <div id="successOverlay" class="hidden absolute inset-0 bg-indigo-900/95 backdrop-blur-sm flex flex-col items-center justify-center text-white z-20 transition-all p-6 text-center">
-            <div class="bg-emerald-500 p-4 rounded-full mb-6 animate-bounce">
-                <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            </div>
-            <h2 class="text-4xl font-black uppercase tracking-tighter mb-2">Hebat Sekali!</h2>
-            <p id="feedbackText" class="text-indigo-200 font-medium max-w-sm">Siap untuk kalimat yang lebih panjang berikutnya?</p>
-        </div>
-    </div>
+        <div id="tableContainer" class="hidden flex-1 overflow-hidden border border-slate-200 rounded-2xl shadow-sm bg-white">
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-left text-sm whitespace-nowrap">
+                  <thead class="bg-slate-50 border-b border-slate-200">
+                      <tr>
+                          <th class="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Poster</th>
+                          <th class="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Brand & Pemilik</th>
+                          <th class="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Katalog Produk</th>
+                          <th class="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest text-center">Hubungi</th>
+                      </tr>
+                  </thead>
+                  <tbody id="tableBody" class="divide-y divide-slate-100 bg-white"></tbody>
+              </table>
+            </div>
+        </div>
+        
+        <footer class="mt-8 text-center">
+            <p class="text-slate-400 text-[10px] tracking-[0.3em] uppercase font-bold">Official Database HIMATEKBIS 2025/2026</p>
+            <p class="text-slate-300 text-[9px] mt-1 font-medium italic">Created by Ekotif Himatekbis</p>
+        </footer>
+      </div>
 
-    <!-- Help Tooltip -->
-    <div class="mt-8 text-slate-400 text-[10px] uppercase tracking-[0.2em] text-center max-w-md leading-relaxed px-4">
-        Gunakan <span class="text-slate-600 font-bold">wa</span> (は), <span class="text-slate-600 font-bold">o</span> (を), <span class="text-slate-600 font-bold">e</span> (へ).<br>
-        Vokal panjang (ー) diketik sebagai <span class="text-slate-600 font-bold">-</span>.
-    </div>
+    </div> 
+  </div> 
 
-    <script>
-        // Database Cerita N5 yang lebih panjang dan kompleks
-        const masterStoryList = [
-            { 
-                h: "きょうはあついですね。つめたいみずをのみたいです。", 
-                r_map: ["kyo", "u", "wa", "a", "tsu", "i", "de", "su", "ne", "tsu", "me", "ta", "i", "mi", "zu", "o", "no", "mi", "ta", "i", "de", "su"],
-                full_r: "kyouwaatsuidesunetsumetaimizuonomitaidesu",
-                m: "Hari ini panas ya. (Saya) ingin minum air dingin." 
-            },
-            { 
-                h: "きのうのあさしちじにおきて、あさごはんをたべました。", 
-                r_map: ["ki", "no", "u", "no", "a", "sa", "shi", "chi", "ji", "ni", "o", "ki", "te", "a", "sa", "go", "ha", "n", "o", "ta", "be", "ma", "shi", "ta"],
-                full_r: "kinounoasashichijiniokiteasagohanotabemashita",
-                m: "Kemarin pagi bangun jam 7, lalu sarapan." 
-            },
-            { 
-                h: "わたしのかぞくはごにんです。ちちとははといもうとがいます。", 
-                r_map: ["wa", "ta", "shi", "no", "ka", "zo", "ku", "wa", "go", "ni", "n", "de", "su", "chi", "chi", "to", "ha", "ha", "to", "i", "mo", "u", "to", "ga", "i", "ma", "su"],
-                full_r: "watashinokazokuwagonindesuchichitohahatoimoutogaimasu",
-                m: "Keluarga saya 5 orang. Ada ayah, ibu, dan adik perempuan." 
-            },
-            { 
-                h: "このりょうりはとてもおいしいですが、すこしからいです。", 
-                r_map: ["ko", "no", "ryo", "u", "ri", "wa", "to", "te", "mo", "o", "i", "shi", "i", "de", "su", "ga", "su", "ko", "shi", "ka", "ra", "i", "de", "su"],
-                full_r: "konoryouriwatotemooishiidesugasukoshikaraidesu",
-                m: "Masakan ini sangat enak tapi sedikit pedas." 
-            },
-            { 
-                h: "らいしゅうのげつようびに、ともだちとにほんへいきます。", 
-                r_map: ["ra", "i", "shu", "u", "no", "ge", "tsu", "yo", "u", "bi", "ni", "to", "mo", "da", "chi", "to", "ni", "ho", "n", "e", "i", "ki", "ma", "su"],
-                full_r: "raishuunogetsuyoubinitomodachitonihoneikimasu",
-                m: "Senin depan (saya) akan pergi ke Jepang bersama teman." 
-            },
-            { 
-                h: "ぎんこうはあそこです。ゆうびんきょくのとなりです。", 
-                r_map: ["gi", "n", "ko", "u", "wa", "a", "so", "ko", "de", "su", "yu", "u", "bi", "n", "kyo", "ku", "no", "to", "na", "ri", "de", "su"],
-                full_r: "ginkouwaasokodesuyuubinkyokunotonaridesu",
-                m: "Bank ada di sana. Di sebelah kantor pos." 
-            },
-            { 
-                h: "せんしゅうはがっこうがやすみでした。とてもひまでした。", 
-                r_map: ["se", "n", "shu", "u", "wa", "ga", "k", "ko", "u", "ga", "ya", "su", "mi", "de", "shi", "ta", "to", "te", "mo", "hi", "ma", "de", "shi", "ta"],
-                full_r: "senshuuwagakkougayasumideshitatotemohimadeshita",
-                m: "Minggu lalu sekolah libur. (Saya) sangat senggang." 
-            }
-        ];
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxG8PTgshg1neXk7K6-tg4JWvzmGeW9ZMxrULP-KeqTjENHaP-YkP8j6wDi883yM5ZOLg/exec";
 
-        let shuffledStories = [];
-        let currentLevel = 0;
-        let score = 0;
+    function switchTab(tab) {
+        const viewForm = document.getElementById('viewForm');
+        const viewData = document.getElementById('viewData');
+        const tabFormBtn = document.getElementById('tabFormBtn');
+        const tabDataBtn = document.getElementById('tabDataBtn');
 
-        const questionBox = document.getElementById('questionBox');
-        const meaningBox = document.getElementById('meaningBox');
-        const input = document.getElementById('romajiInput');
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const levelDisplay = document.getElementById('levelDisplay');
-        const progressBar = document.getElementById('progressBar');
-        const successOverlay = document.getElementById('successOverlay');
-        const resetBtn = document.getElementById('resetBtn');
-        const hintBtn = document.getElementById('hintBtn');
+        if(tab === 'form') {
+            viewForm.classList.remove('hidden');
+            viewData.classList.add('hidden');
+            tabFormBtn.className = "px-8 py-2.5 rounded-xl text-sm font-bold transition-all bg-white text-brand-600 shadow-sm border border-brand-50";
+            tabDataBtn.className = "px-8 py-2.5 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:text-slate-700";
+        } else {
+            viewForm.classList.add('hidden');
+            viewData.classList.remove('hidden');
+            tabDataBtn.className = "px-8 py-2.5 rounded-xl text-sm font-bold transition-all bg-white text-brand-600 shadow-sm border border-brand-50";
+            tabFormBtn.className = "px-8 py-2.5 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:text-slate-700";
+            loadData();
+        }
+    }
 
-        // Fungsi untuk mengacak array (Fisher-Yates)
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
+    async function loadData() {
+        const loadingDiv = document.getElementById('loadingData');
+        const tableContainer = document.getElementById('tableContainer');
+        const loadingMsg = document.getElementById('loadingMsg');
+        
+        loadingDiv.classList.remove('hidden');
+        tableContainer.classList.add('hidden');
+        loadingMsg.innerText = "Memuat database AquaPreneur...";
 
-        function initGame() {
-            shuffledStories = shuffleArray([...masterStoryList]);
-            currentLevel = 0;
-            score = 0;
-            scoreDisplay.textContent = `Skor: 0`;
-            loadStory();
-        }
+        try {
+            const res = await fetch(scriptURL);
+            const data = await res.json();
+            if(data.error) throw new Error(data.error);
+            renderTable(data);
+        } catch (err) {
+            loadingMsg.innerHTML = `<p class="text-red-500 font-bold uppercase text-[10px]">Gagal Memuat Database</p>`;
+        }
+    }
 
-        function loadStory() {
-            const story = shuffledStories[currentLevel];
-            questionBox.innerHTML = '';
-            
-            story.h.split('').forEach((char, index) => {
-                const span = document.createElement('span');
-                span.textContent = char;
-                span.className = 'char-box';
-                span.id = `char-${index}`;
-                questionBox.appendChild(span);
-            });
+    function renderTable(data) {
+        const tableBody = document.getElementById('tableBody');
+        const loadingDiv = document.getElementById('loadingData');
+        const tableContainer = document.getElementById('tableContainer');
+        
+        tableBody.innerHTML = '';
+        
+        if (data && Array.isArray(data) && data.length > 0) {
+            data.slice().reverse().forEach(row => {
+                if(!row.namaUsaha) return;
+                
+                let waClean = String(row.whatsapp || "").replace(/\D/g, '');
+                if (waClean.startsWith('0')) waClean = '62' + waClean.substring(1);
 
-            meaningBox.textContent = story.m;
-            input.value = "";
-            levelDisplay.textContent = `Progres: ${currentLevel + 1}/${shuffledStories.length}`;
-            successOverlay.classList.add('hidden');
-            input.focus();
-            
-            updateProgress();
-            updateHighlights(0);
-        }
+                let fotoElement = '<div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-200 border border-slate-100"><i class="fa-solid fa-image text-lg"></i></div>';
+                if (row.foto && row.foto.startsWith("http")) {
+                    fotoElement = `<a href="${row.foto}" target="_blank">
+                                     <img src="${row.foto}" alt="Poster" class="w-12 h-12 object-cover rounded-xl border border-slate-200 hover:scale-105 transition-transform">
+                                   </a>`;
+                }
 
-        function updateHighlights(typedLength) {
-            const story = shuffledStories[currentLevel];
-            let currentRomajiPos = 0;
-            const hiraganaChars = story.h.split('');
-            let foundNext = false;
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="px-6 py-4">${fotoElement}</td>
+                    <td class="px-6 py-4">
+                        <div class="font-bold text-slate-900 text-sm leading-tight">${row.namaUsaha}</div>
+                        <div class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter mt-1">${row.namaPemilik || '-'}</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-xs font-medium text-slate-600 max-w-xs truncate" title="${row.daftarProduk}">${row.daftarProduk || '-'}</div>
+                        <div class="mt-1"><span class="text-[9px] bg-brand-50 px-2 py-0.5 rounded-full font-bold text-brand-600 uppercase tracking-tighter border border-brand-100">${row.kategori || 'UMKM'}</span></div>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <a href="https://wa.me/${waClean}" 
+                           target="_blank" 
+                           class="inline-flex items-center justify-center w-10 h-10 bg-green-50 text-green-600 rounded-2xl hover:bg-green-600 hover:text-white transition-all shadow-sm border border-green-100">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </a>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+            loadingDiv.classList.add('hidden');
+            tableContainer.classList.remove('hidden');
+        } else {
+            document.getElementById('loadingMsg').innerText = "Belum Ada Data.";
+        }
+    }
 
-            for (let i = 0; i < hiraganaChars.length; i++) {
-                const el = document.getElementById(`char-${i}`);
-                if (!el) continue;
+    document.addEventListener("DOMContentLoaded", function() {
+      const btnAddProduct = document.getElementById("btnAddProduct");
+      const productList = document.getElementById("productList");
 
-                if (typedLength > currentRomajiPos) {
-                    el.classList.add('char-correct');
-                    el.classList.remove('char-next');
-                } else if (!foundNext) {
-                    el.classList.add('char-next');
-                    el.classList.remove('char-correct');
-                    foundNext = true;
-                } else {
-                    el.classList.remove('char-correct', 'char-next');
-                }
+      btnAddProduct.addEventListener("click", () => {
+        const div = document.createElement("div");
+        div.className = "product-item flex flex-col sm:flex-row gap-3 animate-fade-in pt-3 border-t border-slate-100 sm:border-0";
+        div.innerHTML = `
+          <input type="text" placeholder="Nama Produk" required class="produk-nama flex-1 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm font-medium">
+          <input type="number" placeholder="Harga" required class="produk-harga w-full sm:w-40 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm font-medium">
+          <button type="button" onclick="this.parentElement.remove()" class="text-slate-300 hover:text-red-500 px-3 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+        `;
+        productList.appendChild(div);
+      });
 
-                if(story.r_map && story.r_map[i]) {
-                    currentRomajiPos += story.r_map[i].length;
-                } else {
-                    currentRomajiPos += 2;
-                }
-            }
-        }
+      document.getElementById("produkForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
 
-        function updateProgress() {
-            const progress = (currentLevel / shuffledStories.length) * 100;
-            progressBar.style.width = `${progress}%`;
-        }
+        const btnSubmit = document.getElementById("btnSubmit");
+        const btnText = document.getElementById("btnText");
+        const btnSpinner = document.getElementById("btnSpinner");
+        const statusContainer = document.getElementById("statusContainer");
+        const fileInput = document.getElementById("fotoPoster");
 
-        function handleInput() {
-            const userAnswer = input.value.toLowerCase().replace(/\s/g, '').replace(/,/g, '').replace(/\./g, '').replace(/、/g, '').replace(/。/g, '');
-            const target = shuffledStories[currentLevel].full_r;
+        if (fileInput.files.length > 0 && fileInput.files[0].size > 3 * 1024 * 1024) {
+            alert("Ukuran poster melebihi 3MB!");
+            return;
+        }
 
-            // Memeriksa kecocokan
-            if (target.startsWith(userAnswer)) {
-                input.classList.remove('text-rose-500');
-                input.classList.add('text-emerald-600');
-                updateHighlights(userAnswer.length);
-                
-                if (userAnswer === target) {
-                    completeLevel();
-                }
-            } else {
-                input.classList.remove('text-emerald-600');
-                input.classList.add('text-rose-500');
-                shakeCard();
-            }
-        }
+        btnText.innerText = "Mengirim...";
+        btnSpinner.classList.remove("hidden");
+        btnSubmit.disabled = true;
 
-        function provideHint() {
-            const story = shuffledStories[currentLevel];
-            const target = story.full_r;
-            const currentInput = input.value.toLowerCase().replace(/\s/g, '');
-            
-            let currentRomajiPos = 0;
-            let targetCharIndex = 0;
-            
-            for (let i = 0; i < story.r_map.length; i++) {
-                if (currentInput.length > currentRomajiPos) {
-                    currentRomajiPos += story.r_map[i].length;
-                } else {
-                    targetCharIndex = i;
-                    break;
-                }
-            }
+        let arrayProduk = [];
+        document.querySelectorAll(".product-item").forEach(item => {
+          const n = item.querySelector(".produk-nama").value;
+          const h = item.querySelector(".produk-harga").value;
+          if (n && h) arrayProduk.push(`${n} (Rp${parseInt(h).toLocaleString()})`);
+        });
 
-            const correctPortionUntilNext = target.substring(0, currentRomajiPos + story.r_map[targetCharIndex].length);
-            input.value = correctPortionUntilNext;
-            handleInput();
-            input.focus();
-        }
+        const formData = {
+          namaUsaha: document.getElementById("namaUsaha").value,
+          namaPemilik: document.getElementById("namaPemilik").value,
+          whatsapp: document.getElementById("whatsapp").value,
+          kategori: document.getElementById("kategori").value,
+          daftarProduk: arrayProduk.join(", "),
+          keterangan: "Pendaftaran Via Web",
+          fotoData: "",
+          fotoMimeType: "",
+          fotoNama: ""
+        };
 
-        function completeLevel() {
-            document.querySelectorAll('.char-box').forEach(el => {
-                el.classList.add('char-correct');
-                el.classList.remove('char-next');
-            });
-            
-            score += 100;
-            scoreDisplay.textContent = `Skor: ${score}`;
-            
-            setTimeout(() => {
-                successOverlay.classList.remove('hidden');
-                setTimeout(() => {
-                    currentLevel++;
-                    if (currentLevel < shuffledStories.length) {
-                        loadStory();
-                    } else {
-                        document.getElementById('feedbackText').textContent = "Kamu sudah menyelesaikan SEMUA kalimat acak! Luar biasa!";
-                        setTimeout(() => {
-                            initGame();
-                        }, 3000);
-                    }
-                }, 1500);
-            }, 300);
-        }
+        try {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const base64String = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                });
+                formData.fotoNama = file.name;
+                formData.fotoMimeType = file.type;
+                formData.fotoData = base64String.split(',')[1];
+            }
 
-        function shakeCard() {
-            const container = document.getElementById('gameContainer');
-            if (!container.classList.contains('card-shake')) {
-                container.classList.add('card-shake');
-                setTimeout(() => container.classList.remove('card-shake'), 400);
-            }
-        }
+            await fetch(scriptURL, {
+                method: "POST",
+                mode: 'no-cors',
+                body: JSON.stringify(formData),
+                headers: { "Content-Type": "text/plain" }
+            });
 
-        input.addEventListener('input', handleInput);
-        resetBtn.addEventListener('click', initGame);
-        hintBtn.addEventListener('click', provideHint);
-
-        // Memulai game pertama kali
-        initGame();
-    </script>
+            statusContainer.className = "mt-6 p-4 rounded-xl border bg-green-50 border-green-200 text-green-700 flex items-center gap-3 justify-center";
+            document.getElementById("statusIcon").innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            document.getElementById("statusText").innerText = "DATA BERHASIL TERKIRIM!";
+            statusContainer.classList.remove("hidden");
+            this.reset();
+            const items = document.querySelectorAll(".product-item");
+            for(let i=1; i<items.length; i++) items[i].remove();
+        } catch (err) {
+            statusContainer.className = "mt-6 p-4 rounded-xl border bg-amber-50 border-amber-200 text-amber-700 flex items-center gap-3 justify-center";
+            document.getElementById("statusText").innerText = "Gagal mengirim data.";
+            statusContainer.classList.remove("hidden");
+        } finally {
+            btnText.innerText = "Daftarkan Sekarang";
+            btnSpinner.classList.add("hidden");
+            btnSubmit.disabled = false;
+        }
+      });
+    });
+  </script>
 </body>
 </html>
