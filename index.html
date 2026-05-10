@@ -55,9 +55,26 @@
     ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    
+    /* Perbaikan Khusus Mobile */
+    @media (max-width: 640px) {
+      .container-card { 
+        margin: 0.75rem !important; 
+        padding: 1.25rem !important; 
+        border-radius: 1.5rem !important;
+      }
+      .tab-btn { 
+        padding-left: 1rem !important; 
+        padding-right: 1rem !important; 
+        font-size: 0.75rem !important; 
+      }
+      .form-section {
+        padding: 1rem !important;
+      }
+    }
   </style>
 </head>
-<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4 relative overflow-x-hidden text-slate-800 antialiased font-sans">
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-x-hidden text-slate-800 antialiased font-sans">
 
   <!-- Efek Dekorasi Latar Belakang -->
   <div class="fixed top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
@@ -65,58 +82,54 @@
     <div class="absolute top-[20%] right-[-5%] w-80 h-80 bg-cyan-100 rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob" style="animation-delay: 2s"></div>
   </div>
 
-  <div class="relative z-10 w-full max-w-5xl mx-auto my-8">
-    <div class="bg-white/90 backdrop-blur-xl border border-white rounded-3xl p-6 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col min-h-[600px]">
+  <div class="relative z-10 w-full max-w-5xl mx-auto my-4 sm:my-8">
+    <div class="container-card bg-white/90 backdrop-blur-xl border border-white rounded-[2rem] p-5 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col min-h-[600px]">
     
       <div class="text-center mb-8">
         <div class="flex flex-col items-center mb-4">
-            <div class="inline-flex justify-center items-center w-16 h-16 bg-white rounded-2xl border border-brand-100 shadow-lg mb-4 animate-pulse-glow">
-              <i class="fa-solid fa-fish-fins text-2xl text-brand-600"></i>
+            <div class="inline-flex justify-center items-center w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-2xl border border-brand-100 shadow-lg mb-4 animate-pulse-glow">
+              <i class="fa-solid fa-anchor text-xl sm:text-2xl text-brand-600"></i>
             </div>
-            <!-- Perbaikan: Tulisan Himpunan dibuat lebih besar (text-sm) dan lebih tebal -->
-            <p class="text-sm font-extrabold text-brand-900 uppercase tracking-widest mb-1 px-4 leading-tight">
-              Himpunan Mahasiswa Teknologi dan Bisnis Perikanan dan Kelautan
-            </p>
-            <p class="text-xs font-semibold text-slate-500 mb-2">Kabinet Periode 2025/2026</p>
+            <p class="text-[9px] sm:text-[10px] font-bold text-brand-600 uppercase tracking-[0.2em] mb-1 px-4 leading-tight">Himpunan Mahasiswa Teknologi dan Bisnis Perikanan dan Kelautan</p>
+            <p class="text-[10px] sm:text-[11px] font-medium text-slate-500 mb-2">Periode 2025/2026</p>
         </div>
         
-        <h2 class="text-4xl font-black text-slate-900 tracking-tighter mb-6">
-            AquaPreneur <span class="text-brand-600">Database</span>
-        </h2>
+        <h2 class="text-2xl sm:text-3xl font-bold text-brand-900 tracking-tight mb-6">AquaPreneur <span class="text-brand-600">Database</span></h2>
         
-        <div class="inline-flex bg-slate-100 p-1.5 rounded-2xl shadow-inner">
-          <button id="tabFormBtn" onclick="switchTab('form')" class="px-8 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-brand-600 shadow-sm border border-brand-50">
-            Daftar Usaha
+        <div class="inline-flex bg-slate-100 p-1 rounded-xl shadow-inner w-full sm:w-auto">
+          <button id="tabFormBtn" onclick="switchTab('form')" class="tab-btn flex-1 sm:flex-none px-4 sm:px-8 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 bg-white text-brand-600 shadow-sm">
+            Input Data UMKM
           </button>
-          <button id="tabDataBtn" onclick="switchTab('data')" class="px-8 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 text-slate-500 hover:text-slate-700">
-            Lihat Database
+          <button id="tabDataBtn" onclick="switchTab('data')" class="tab-btn flex-1 sm:flex-none px-4 sm:px-8 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 text-slate-500 hover:text-slate-700">
+            Database Terpusat
           </button>
         </div>
       </div>
 
       <!-- TAMPILAN: FORM INPUT -->
       <div id="viewForm" class="animate-fade-in w-full max-w-4xl mx-auto">
-        <form id="produkForm" class="space-y-6">
-            <div class="p-6 bg-slate-50/50 rounded-2xl border border-slate-100">
-              <h3 class="text-lg font-bold text-slate-800 border-b border-slate-200 pb-3 mb-5 flex items-center">
+        <form id="produkForm" class="space-y-5 sm:y-6">
+            <!-- SEKSI 1: INFO BISNIS -->
+            <div class="form-section p-5 sm:p-6 bg-slate-50/50 rounded-2xl border border-slate-100">
+              <h3 class="text-base sm:text-lg font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-5 flex items-center">
                 <i class="fa-solid fa-shop text-brand-500 mr-2"></i>Informasi Bisnis
               </h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 <div class="space-y-1">
-                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Nama Usaha / Brand</label>
-                  <input type="text" id="namaUsaha" placeholder="Nama Brand Anda" required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 transition-all font-medium">
+                  <label class="block text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Nama Usaha / Brand</label>
+                  <input type="text" id="namaUsaha" placeholder="Nama Brand Anda" required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 transition-all text-sm">
                 </div>
                 <div class="space-y-1">
-                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Nama Pemilik</label>
-                  <input type="text" id="namaPemilik" placeholder="Nama Lengkap" required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 transition-all font-medium">
+                  <label class="block text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Nama Pemilik</label>
+                  <input type="text" id="namaPemilik" placeholder="Nama Lengkap" required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 transition-all text-sm">
                 </div>
                 <div class="space-y-1">
-                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">No. WhatsApp Aktif</label>
-                  <input type="tel" id="whatsapp" placeholder="Contoh: 08123..." required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 transition-all font-medium">
+                  <label class="block text-[10px] font-semibold text-slate-500 uppercase tracking-wide">No. WhatsApp Aktif</label>
+                  <input type="tel" id="whatsapp" placeholder="Contoh: 08123..." required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 transition-all text-sm">
                 </div>
                 <div class="space-y-1">
-                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Kategori Usaha</label>
-                  <select id="kategori" required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 appearance-none cursor-pointer font-medium">
+                  <label class="block text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Kategori Usaha</label>
+                  <select id="kategori" required class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 appearance-none cursor-pointer text-sm">
                     <option value="" disabled selected>Pilih Kategori</option>
                     <option value="Makanan & Minuman">Makanan & Minuman</option>
                     <option value="Budidaya & Perikanan">Budidaya & Perikanan</option>
@@ -126,40 +139,49 @@
                 </div>
                 
                 <div class="space-y-1 sm:col-span-2 mt-2">
-                  <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide">Upload Poster/Foto Usaha (Maks 3MB)</label>
-                  <input type="file" id="fotoPoster" accept="image/png, image/jpeg, image/jpg" class="w-full bg-white border border-slate-200 rounded-xl py-2 px-4 outline-none focus:border-brand-500 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 text-xs">
+                  <label class="block text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Upload Poster/Foto Usaha</label>
+                  <input type="file" id="fotoPoster" accept="image/png, image/jpeg, image/jpg" class="w-full bg-white border border-slate-200 rounded-xl py-2 px-4 outline-none focus:border-brand-500 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 text-[11px]">
+                  <p class="text-[9px] text-slate-400 mt-1">*Maksimal ukuran file 3MB.</p>
                 </div>
               </div>
             </div>
 
-            <div class="p-6 bg-slate-50/50 rounded-2xl border border-slate-100">
-              <h3 class="text-lg font-bold text-slate-800 border-b border-slate-200 pb-3 mb-4 flex items-center">
+            <!-- SEKSI 2: PRODUK -->
+            <div class="form-section p-5 sm:p-6 bg-slate-50/50 rounded-2xl border border-slate-100">
+              <h3 class="text-base sm:text-lg font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-4 flex items-center">
                 <i class="fa-solid fa-tags text-brand-500 mr-2"></i>Daftar Produk & Harga
               </h3>
               <div id="productList" class="space-y-3">
                 <div class="product-item flex flex-col sm:flex-row gap-3">
-                  <input type="text" placeholder="Nama Produk" required class="produk-nama flex-1 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm font-medium">
-                  <input type="number" placeholder="Harga (Rp)" required class="produk-harga w-full sm:w-40 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm font-medium">
+                  <input type="text" placeholder="Nama Produk" required class="produk-nama flex-1 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm">
+                  <input type="number" placeholder="Harga (Rp)" required class="produk-harga w-full sm:w-40 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm">
                 </div>
               </div>
-              <button type="button" id="btnAddProduct" class="mt-4 w-full py-3 bg-white border border-dashed border-slate-300 text-slate-400 rounded-xl hover:bg-slate-100 hover:text-brand-600 text-xs font-bold transition-all uppercase tracking-wider">
-                <i class="fa-solid fa-plus mr-1"></i> Tambah Item Produk
+              <button type="button" id="btnAddProduct" class="mt-4 w-full py-3 bg-white border border-dashed border-slate-300 text-slate-500 rounded-xl hover:bg-slate-100 hover:text-brand-600 text-xs font-medium transition-all">
+                <i class="fa-solid fa-plus mr-1"></i> Tambah Baris Produk
               </button>
             </div>
 
-            <button type="submit" id="btnSubmit" class="w-full bg-brand-600 text-white font-black py-4 rounded-2xl hover:bg-brand-700 shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2 uppercase tracking-widest text-sm">
-              <span id="btnText">Daftarkan Sekarang</span> <i id="btnIcon" class="fa-solid fa-paper-plane"></i>
+            <!-- SEKSI 3: KETERANGAN TAMBAHAN -->
+            <div class="form-section p-5 sm:p-6 bg-slate-50/50 rounded-2xl border border-slate-100">
+              <h3 class="text-base sm:text-lg font-semibold text-slate-800 border-b border-slate-200 pb-3 mb-4 flex items-center">
+                <i class="fa-solid fa-comment-dots text-brand-500 mr-2"></i>Keterangan Tambahan
+              </h3>
+              <textarea id="keterangan" rows="3" placeholder="Tambahkan deskripsi singkat atau catatan mengenai usaha Anda..." class="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none focus:border-brand-500 transition-all resize-none text-sm font-medium"></textarea>
+            </div>
+
+            <button type="submit" id="btnSubmit" class="w-full bg-brand-600 text-white font-bold py-4 rounded-2xl hover:bg-brand-700 shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm">
+              <span id="btnText">Daftarkan Usaha</span> <i id="btnIcon" class="fa-solid fa-paper-plane"></i>
               <svg id="btnSpinner" class="hidden animate-spin h-5 w-5 text-white" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
             </button>
         </form>
-        
+
         <div id="statusContainer" class="hidden mt-6 p-4 rounded-xl border flex items-center gap-3 transition-all text-center justify-center shadow-sm">
-          <div id="statusIcon"></div><p id="statusText" class="text-sm font-bold"></p>
+          <div id="statusIcon"></div><p id="statusText" class="text-sm font-medium"></p>
         </div>
         
-        <footer class="mt-12 text-center">
-            <p class="text-slate-400 text-[10px] tracking-[0.3em] uppercase font-bold">HIMATEKBIS 2026</p>
-            <p class="text-slate-300 text-[9px] mt-1 font-medium italic">Created by Ekotif Himatekbis</p>
+        <footer class="mt-10 text-center pb-4 text-slate-400 text-[9px] tracking-widest uppercase font-semibold">
+            HIMATEKBIS - Departemen Kewirausahaan © 2025
         </footer>
       </div>
 
@@ -167,19 +189,19 @@
       <div id="viewData" class="hidden animate-fade-in flex-1 flex flex-col h-full">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
             <div>
-                <h3 class="text-xl font-black text-slate-800 flex items-center">
+                <h3 class="text-xl font-bold text-slate-800 flex items-center">
                     <i class="fa-solid fa-database text-brand-500 mr-2"></i>Database Terpusat
                 </h3>
-                <p class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Katalog Wirausaha Mahasiswa HIMATEKBIS</p>
+                <p class="text-xs text-slate-400 mt-1">Daftar wirausaha binaan & kolektif HIMATEKBIS</p>
             </div>
-            <button onclick="loadData()" class="flex items-center text-[10px] font-black uppercase tracking-widest bg-brand-50 text-brand-600 px-5 py-2.5 rounded-xl border border-brand-100 hover:bg-brand-600 hover:text-white transition-all shadow-sm">
-                <i class="fa-solid fa-sync mr-2"></i> Perbarui Data
+            <button onclick="loadData()" class="flex items-center text-xs bg-brand-50 text-brand-600 px-4 py-2.5 rounded-xl border border-brand-100 hover:bg-brand-100 transition-colors w-full sm:w-auto justify-center">
+                <i class="fa-solid fa-sync mr-2"></i> Refresh Data
             </button>
         </div>
         
         <div id="loadingData" class="flex-1 flex flex-col items-center justify-center py-20 bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
-            <div class="w-12 h-12 border-4 border-brand-100 border-t-brand-500 rounded-full animate-spin"></div>
-            <p id="loadingMsg" class="mt-4 text-slate-500 text-xs font-bold uppercase tracking-widest">Sinkronisasi Server...</p>
+            <div class="w-10 h-10 border-4 border-brand-100 border-t-brand-500 rounded-full animate-spin"></div>
+            <p id="loadingMsg" class="mt-4 text-slate-500 text-xs font-medium">Sinkronisasi Server...</p>
         </div>
 
         <div id="tableContainer" class="hidden flex-1 overflow-hidden border border-slate-200 rounded-2xl shadow-sm bg-white">
@@ -187,10 +209,11 @@
               <table class="min-w-full text-left text-sm whitespace-nowrap">
                   <thead class="bg-slate-50 border-b border-slate-200">
                       <tr>
-                          <th class="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Poster</th>
-                          <th class="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Brand & Pemilik</th>
-                          <th class="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest">Katalog Produk</th>
-                          <th class="px-6 py-4 font-black text-slate-500 uppercase text-[10px] tracking-widest text-center">Hubungi</th>
+                          <th class="px-5 py-4 font-bold text-slate-700 text-[11px] uppercase tracking-wider">Poster</th>
+                          <th class="px-5 py-4 font-bold text-slate-700 text-[11px] uppercase tracking-wider">Brand & Pemilik</th>
+                          <th class="px-5 py-4 font-bold text-slate-700 text-[11px] uppercase tracking-wider">Produk</th>
+                          <th class="px-5 py-4 font-bold text-slate-700 text-[11px] uppercase tracking-wider">Catatan</th>
+                          <th class="px-5 py-4 font-bold text-slate-700 text-[11px] uppercase tracking-wider text-center">WA</th>
                       </tr>
                   </thead>
                   <tbody id="tableBody" class="divide-y divide-slate-100 bg-white"></tbody>
@@ -198,9 +221,8 @@
             </div>
         </div>
         
-        <footer class="mt-8 text-center">
-            <p class="text-slate-400 text-[10px] tracking-[0.3em] uppercase font-bold">Official Database HIMATEKBIS 2025/2026</p>
-            <p class="text-slate-300 text-[9px] mt-1 font-medium italic">Created by Ekotif Himatekbis</p>
+        <footer class="mt-8 text-center pb-4 text-slate-400 text-[9px] tracking-widest uppercase font-semibold">
+            Official Database HIMATEKBIS 2025/2026
         </footer>
       </div>
 
@@ -219,13 +241,13 @@
         if(tab === 'form') {
             viewForm.classList.remove('hidden');
             viewData.classList.add('hidden');
-            tabFormBtn.className = "px-8 py-2.5 rounded-xl text-sm font-bold transition-all bg-white text-brand-600 shadow-sm border border-brand-50";
-            tabDataBtn.className = "px-8 py-2.5 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:text-slate-700";
+            tabFormBtn.className = "tab-btn flex-1 sm:flex-none px-4 sm:px-8 py-2.5 rounded-lg text-sm font-semibold transition-all bg-white text-brand-600 shadow-sm";
+            tabDataBtn.className = "tab-btn flex-1 sm:flex-none px-4 sm:px-8 py-2.5 rounded-lg text-sm font-medium transition-all text-slate-500 hover:text-slate-700";
         } else {
             viewForm.classList.add('hidden');
             viewData.classList.remove('hidden');
-            tabDataBtn.className = "px-8 py-2.5 rounded-xl text-sm font-bold transition-all bg-white text-brand-600 shadow-sm border border-brand-50";
-            tabFormBtn.className = "px-8 py-2.5 rounded-xl text-sm font-semibold transition-all text-slate-500 hover:text-slate-700";
+            tabDataBtn.className = "tab-btn flex-1 sm:flex-none px-4 sm:px-8 py-2.5 rounded-lg text-sm font-semibold transition-all bg-white text-brand-600 shadow-sm";
+            tabFormBtn.className = "tab-btn flex-1 sm:flex-none px-4 sm:px-8 py-2.5 rounded-lg text-sm font-medium transition-all text-slate-500 hover:text-slate-700";
             loadData();
         }
     }
@@ -237,7 +259,7 @@
         
         loadingDiv.classList.remove('hidden');
         tableContainer.classList.add('hidden');
-        loadingMsg.innerText = "Memuat database AquaPreneur...";
+        loadingMsg.innerText = "Memuat database...";
 
         try {
             const res = await fetch(scriptURL);
@@ -245,7 +267,7 @@
             if(data.error) throw new Error(data.error);
             renderTable(data);
         } catch (err) {
-            loadingMsg.innerHTML = `<p class="text-red-500 font-bold uppercase text-[10px]">Gagal Memuat Database</p>`;
+            loadingMsg.innerHTML = `<p class="text-red-500 font-bold text-xs uppercase">Gagal Sinkronisasi Data</p>`;
         }
     }
 
@@ -263,30 +285,26 @@
                 let waClean = String(row.whatsapp || "").replace(/\D/g, '');
                 if (waClean.startsWith('0')) waClean = '62' + waClean.substring(1);
 
-                let fotoElement = '<div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-200 border border-slate-100"><i class="fa-solid fa-image text-lg"></i></div>';
+                let fotoElement = '<div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-300 border border-slate-50"><i class="fa-solid fa-image text-sm"></i></div>';
                 if (row.foto && row.foto.startsWith("http")) {
                     fotoElement = `<a href="${row.foto}" target="_blank">
-                                     <img src="${row.foto}" alt="Poster" class="w-12 h-12 object-cover rounded-xl border border-slate-200 hover:scale-105 transition-transform">
+                                     <img src="${row.foto}" alt="Poster" class="w-10 h-10 object-cover rounded-lg border border-slate-200 hover:opacity-80 transition-opacity">
                                    </a>`;
                 }
 
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/50 transition-colors";
+                tr.className = "hover:bg-slate-50 transition-colors";
                 tr.innerHTML = `
-                    <td class="px-6 py-4">${fotoElement}</td>
-                    <td class="px-6 py-4">
-                        <div class="font-bold text-slate-900 text-sm leading-tight">${row.namaUsaha}</div>
-                        <div class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter mt-1">${row.namaPemilik || '-'}</div>
+                    <td class="px-5 py-4">${fotoElement}</td>
+                    <td class="px-5 py-4">
+                        <div class="font-bold text-slate-800 text-xs sm:text-sm">${row.namaUsaha}</div>
+                        <div class="text-[9px] text-slate-400 font-bold uppercase tracking-tight mt-0.5">${row.namaPemilik || '-'}</div>
                     </td>
-                    <td class="px-6 py-4">
-                        <div class="text-xs font-medium text-slate-600 max-w-xs truncate" title="${row.daftarProduk}">${row.daftarProduk || '-'}</div>
-                        <div class="mt-1"><span class="text-[9px] bg-brand-50 px-2 py-0.5 rounded-full font-bold text-brand-600 uppercase tracking-tighter border border-brand-100">${row.kategori || 'UMKM'}</span></div>
-                    </td>
-                    <td class="px-6 py-4 text-center">
-                        <a href="https://wa.me/${waClean}" 
-                           target="_blank" 
-                           class="inline-flex items-center justify-center w-10 h-10 bg-green-50 text-green-600 rounded-2xl hover:bg-green-600 hover:text-white transition-all shadow-sm border border-green-100">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <td class="px-5 py-4 text-[11px] text-slate-600 max-w-[120px] sm:max-w-xs truncate" title="${row.daftarProduk}">${row.daftarProduk || '-'}</td>
+                    <td class="px-5 py-4 text-[10px] text-slate-400 italic max-w-[100px] sm:max-w-[150px] truncate" title="${row.keterangan}">${row.keterangan || '-'}</td>
+                    <td class="px-5 py-4 text-center">
+                        <a href="https://wa.me/${waClean}" target="_blank" class="inline-flex items-center justify-center w-8 h-8 bg-green-50 text-green-600 rounded-full hover:bg-green-600 hover:text-white transition-all shadow-sm">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
                         </a>
                     </td>
                 `;
@@ -295,7 +313,7 @@
             loadingDiv.classList.add('hidden');
             tableContainer.classList.remove('hidden');
         } else {
-            document.getElementById('loadingMsg').innerText = "Belum Ada Data.";
+            document.getElementById('loadingMsg').innerText = "Belum ada data UMKM.";
         }
     }
 
@@ -307,9 +325,9 @@
         const div = document.createElement("div");
         div.className = "product-item flex flex-col sm:flex-row gap-3 animate-fade-in pt-3 border-t border-slate-100 sm:border-0";
         div.innerHTML = `
-          <input type="text" placeholder="Nama Produk" required class="produk-nama flex-1 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm font-medium">
-          <input type="number" placeholder="Harga" required class="produk-harga w-full sm:w-40 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm font-medium">
-          <button type="button" onclick="this.parentElement.remove()" class="text-slate-300 hover:text-red-500 px-3 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+          <input type="text" placeholder="Nama Produk" required class="produk-nama flex-1 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm">
+          <input type="number" placeholder="Harga" required class="produk-harga w-full sm:w-40 bg-white border border-slate-200 rounded-xl py-2.5 px-4 outline-none focus:border-brand-500 transition-all text-sm">
+          <button type="button" onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-600 px-3 text-sm py-1 sm:py-0"><i class="fa-solid fa-trash-can"></i></button>
         `;
         productList.appendChild(div);
       });
@@ -324,11 +342,11 @@
         const fileInput = document.getElementById("fotoPoster");
 
         if (fileInput.files.length > 0 && fileInput.files[0].size > 3 * 1024 * 1024) {
-            alert("Ukuran poster melebihi 3MB!");
+            alert("Poster terlalu besar (Maks 3MB)!");
             return;
         }
 
-        btnText.innerText = "Mengirim...";
+        btnText.innerText = "Memproses...";
         btnSpinner.classList.remove("hidden");
         btnSubmit.disabled = true;
 
@@ -345,7 +363,7 @@
           whatsapp: document.getElementById("whatsapp").value,
           kategori: document.getElementById("kategori").value,
           daftarProduk: arrayProduk.join(", "),
-          keterangan: "Pendaftaran Via Web",
+          keterangan: document.getElementById("keterangan").value,
           fotoData: "",
           fotoMimeType: "",
           fotoNama: ""
@@ -373,7 +391,7 @@
 
             statusContainer.className = "mt-6 p-4 rounded-xl border bg-green-50 border-green-200 text-green-700 flex items-center gap-3 justify-center";
             document.getElementById("statusIcon").innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-            document.getElementById("statusText").innerText = "DATA BERHASIL TERKIRIM!";
+            document.getElementById("statusText").innerText = "DAFTAR BERHASIL!";
             statusContainer.classList.remove("hidden");
             this.reset();
             const items = document.querySelectorAll(".product-item");
@@ -383,7 +401,7 @@
             document.getElementById("statusText").innerText = "Gagal mengirim data.";
             statusContainer.classList.remove("hidden");
         } finally {
-            btnText.innerText = "Daftarkan Sekarang";
+            btnText.innerText = "Daftarkan Usaha";
             btnSpinner.classList.add("hidden");
             btnSubmit.disabled = false;
         }
